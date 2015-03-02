@@ -1,11 +1,13 @@
 #include "RSC\defines.hpp"
 #include "RSC\dialogs.hpp"
+#include "scripts\outlw_magRepack\MagRepack_config.hpp"
+#include "eutw_gui\groupManager\Dialogs\groupManagerDefinitions.hpp"
+#include "eutw_gui\groupManager\Dialogs\groupManagerDialogs.hpp"
 
-dev = "Nashable @m_nash";
-author = "http://playDefiance.com";
-OnLoadName = "Defiance Altis";
+author = "Nash - Modified by Oddball+FHSM";
+OnLoadName = "Riot Control Gaming | Defiance Altis | ZvZ TvT";
 onLoadMission = "";
-overviewText = "Read the full rules at http://playdefiance.com/rules/";
+overviewText = "Read the rules in the briefing section on map.";
 overviewTextLocked = "";
 overviewPicture = "img\defiance.jpg";
 respawn = 3;
