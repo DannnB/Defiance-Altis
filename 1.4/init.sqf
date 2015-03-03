@@ -1,7 +1,7 @@
 [] call compileFinal PreProcessFile "scripts\outlw_magRepack\MagRepack_init_sv.sqf";
 [] call compileFinal PreProcessFile "scripts\zlt_fastrope.sqf";
 [] call compileFinal PreProcessFile "scripts\group_manager.sqf";
-[] call compile PreProcessFile "eutw_gui\groupManager\groupScriptInit.sqf";
+[] call compile PreProcessFile "groupManager\groupScriptInit.sqf";
 
 // forEach selects all units in an array, eg all players
 { _x enableFatigue false; } forEach (player);

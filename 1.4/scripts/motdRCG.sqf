@@ -10,5 +10,5 @@ sleep 5;
 globalChat "Taviana Life | 167.114.156.19:2330";
 sleep 5
 globalChat "www.riotcontrolgaming.com";
-sleep 300;
+sleep 30;
 };

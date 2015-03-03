@@ -76,7 +76,10 @@ if (HELO_LIFT > 0) then {[_liftGroundBlacklist,_liftAirBlacklist] execVM "script
 DEF_PLAYER_SIDE = playerSide;
 
 //GROUP MANAGEMENT
-[player] execVM "scripts\groupsMenu\initGroups.sqf";
+//Zuff
+//[player] execVM "scripts\groupsMenu\initGroups.sqf";
+//Roll Call
+[false] execVM "RC\rollcall_init.sqf";
 
 ///Dynamic Weather Client
 if (DYN_WEATHER) then {[date,START_WEATHER,WEATHER_CHANGE_SPEED] execVM "scripts\real_weather.sqf";};
@@ -165,6 +168,7 @@ if (DEF_PLAYER_SIDE == west) then {
 //Unflip Action
 Flip_Action = player addAction ["Unflip Vehicle", "scripts\unflip.sqf", [], 0, false, true, "", "_this == vehicle _target && (cursorTarget isKindOf 'LandVehicle') && (_this distance cursorTarget <= 5)"];
 [[player], "sv_register_unit_zeus", false, false] spawn BIS_fnc_MP;
+call cl_HandleDLC;
 call cl_welcomeMessage;
 
 //Killed EH
@@ -217,14 +221,39 @@ player addEventHandler ["Respawn", {
 			[["update",_unit,_role], "updateZeus", false, false] spawn BIS_fnc_MP;
 		};
 		if (!isNil "_corpse") then {deleteVehicle _corpse};
+		call cl_HandleDLC;
 		[] spawn cl_spawnsafetycheck;
 }];
+
+//Anti Mortar Base Script
+player addEventHandler ["WeaponAssembled",{
+	_unit = _this select 1;
+	if (_unit isKindOf "StaticMortar") then {
+		if (_unit distance getMarkerPos "respawn_west" < 150) then
+		{
+			deleteVehicle _unit;
+			hintC "You cannot build Mortars within the BLUFOR HQ Safezone";
+		} else
+		{
+			[[_unit], "cmn_MortarFiredHandler", true, false] spawn BIS_fnc_MP;
+		};
+
+	};
+}];
+
+//if JIP lets catch up on Mortars already built
+if (time > 1) then {
+	{
+		[_x] call cmn_MortarFiredHandler;
+	} forEach (allMissionObjects "StaticMortar");
+};
 
 // Enable victory check loop
 [] spawn cl_victoryLoop;
 
 //Player markers
-if (PLAYER_MAP_MARKERS == 1) Then {[] spawn playerMarkers};
+//if (PLAYER_MAP_MARKERS > 0) Then {[] spawn playerMarkers};
+if (PLAYER_MAP_MARKERS > 0) Then {["PlayerMarkers", "onEachFrame", def_fnc_playermarkers] call BIS_fnc_addStackedEventHandler};
 
 //Grab data JIP
 if (time > 30) then {[[player], "send_all_data", false, false] spawn BIS_fnc_MP; };
