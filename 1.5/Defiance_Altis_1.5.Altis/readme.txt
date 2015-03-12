@@ -1,3 +1,24 @@
+Defiance 1.5a - Dev (By Oddball)
+
+----------
+| Credits |
+----------
+
+magRepack - Outlawled
+Fast Rope - [STELS]Zealot
+
+-------------
+| Changelog |
+-------------
+*12/03/2015* - 1.5a
+- cleaned up code
+- added in magRepack 3.1.1 (script ver) and fastrope
+
+------------------------------------------------------------
+***Last up to date readme from nash below***
+***Site is down. Credits remain the same.***
+------------------------------------------------------------
+
 Arma Defiance - 1.3 Final
 Author: nashable admin@playdefiance.com
 Defiance Copyright (C) 2014 Mark Nash (@m_nash)
